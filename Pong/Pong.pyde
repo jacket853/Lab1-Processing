@@ -1,6 +1,7 @@
 x, y, speedX, speedY = 0, 0, 0, 0
 diam = 10
 rectSize = 100
+objs = []
 
 def setup():
     size(600,500)
@@ -8,7 +9,7 @@ def setup():
     restart()
 
 def draw():
-    global x, y, speedX, speedY
+    global x, y, speedX, speedY, objs
     background(0)
     
     ball = Particle(x, y, diam)
@@ -22,6 +23,7 @@ def draw():
         
 def restart():
     global x, y, speedX, speedY
+    # set ball coordinates to middle of screen once game restarts
     x = width/2
     y = height/2
     speedX = 4
