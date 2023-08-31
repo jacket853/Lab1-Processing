@@ -1,29 +1,36 @@
 x, y, speedX, speedY = 0, 0, 0, 0
 diam = 10
-rectSize = 200
+barSize = 100
+objs = []
 
 def setup():
     size(600, 500)
     fill(255, 255, 255)
-    reset()
+    restart()
 
-def reset():
+def draw():
+    global x, y, speedX, speedY, objs
+    background(0)
+    
+    ball = Particle(x, y, diam)
+    wall = Rectangle(0, 0, 20, height)
+    bar = Rectangle(width-15, mouseY-rectSize/2, 8, rectSize)
+    objs = [ball, wall, bar]
+    for obj in objs:
+        obj.drawSelf()
+    
+    x += speedX
+    y += speedY
+
+def restart():
     global x, y, speedX, speedY
     x = width/2
     y = height/2
     speedX = 4
     speedY = 4
-
-def draw():
-    global x, y, speedX, speedY
-    background(0)
-    ball = Particle(x, y, diam)
-    ball.drawSelf()
     
-    rect(0, 0, 20, height)
-    rect(width-30, mouseY-rectSize/2, 10, rectSize)
-    x += speedX
-    y += speedY
+def keyPressed():
+    restart()
 
 class Particle(object):
     def __init__(self, x, y, diam):
@@ -43,6 +50,3 @@ class Rectangle(object):
     
     def drawSelf(self):
         rect(self.xcoord, self.ycoord, self.rectWidth, self.rectHeight)
-
-def mousePressed():
-    reset()
