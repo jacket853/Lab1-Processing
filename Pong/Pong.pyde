@@ -1,15 +1,14 @@
 x, y, speedX, speedY = 0, 0, 0, 0
 diam = 10
-barSize = 100
-objs = []
+rectSize = 100
 
 def setup():
-    size(600, 500)
+    size(600,500)
     fill(255, 255, 255)
     restart()
 
 def draw():
-    global x, y, speedX, speedY, objs
+    global x, y, speedX, speedY
     background(0)
     
     ball = Particle(x, y, diam)
@@ -18,20 +17,19 @@ def draw():
     objs = [ball, wall, bar]
     for obj in objs:
         obj.drawSelf()
-    
     x += speedX
     y += speedY
-
+        
 def restart():
     global x, y, speedX, speedY
     x = width/2
     y = height/2
     speedX = 4
     speedY = 4
-    
+
 def keyPressed():
     restart()
-
+    
 class Particle(object):
     def __init__(self, x, y, diam):
         self.x = x
