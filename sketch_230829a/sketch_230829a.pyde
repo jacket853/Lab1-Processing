@@ -4,7 +4,7 @@ rectSize = 200
 
 def setup():
     size(600, 500)
-    fill(0, 255, 0)
+    fill(255, 255, 255)
     reset()
 
 def reset():
@@ -18,7 +18,12 @@ def draw():
     global x, y, speedX, speedY
     background(0)
     ball = Particle(x, y, diam)
-    ellipse(x, y, diam, diam)
+    ball.drawSelf()
+    
+    rect(0, 0, 20, height)
+    rect(width-30, mouseY-rectSize/2, 10, rectSize)
+    x += speedX
+    y += speedY
 
 class Particle(object):
     def __init__(self, x, y, diam):
@@ -27,7 +32,17 @@ class Particle(object):
         self.diam =  diam
     
     def drawSelf(self):
-        ellipse(self.x, self.y, self.diam, self.diam)
+        circle(self.x, self.y, self.diam)
+        
+class Rectangle(object):
+    def __init__(self, xcoord, ycoord, rectWidth, rectHeight):
+        self.xcoord = xcoord
+        self.ycoord = ycoord
+        self.rectWidth = rectWidth
+        self.rectHeight = rectHeight
+    
+    def drawSelf(self):
+        rect(self.xcoord, self.ycoord, self.rectWidth, self.rectHeight)
 
 def mousePressed():
     reset()
