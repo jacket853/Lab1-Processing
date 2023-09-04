@@ -2,13 +2,17 @@ x, y, velX, velY = 0, 0, 0, 0
 diam = 10
 rectSize = 100
 objs = []
+score = 0
 
 def restart():
-    global x, y, velX, velY
+    global x, y, velX, velY, score
+    
+    score = 0 # reset game score
+    print("Your current highscore is: {}".format(score)) # Can't use fstrings in python 2
     # set ball coordinates to middle of screen once game restarts
     x = width/2
     y = height/2
-    velX = random(2,6)
+    velX = random(2,5)
     velY = random(3,6)
 
 def setup():
@@ -34,14 +38,15 @@ def keyPressed():
     restart()
 
 def checkHit():
-    global velX, velY, x, y
+    global velX, velY, x, y, score
     if y > height or y < 0:
         velY *= -1
     elif (x > width-15) and (x < width-10) and (y > mouseY-rectSize/2) and (y < mouseY+rectSize/2):
-        velX = velX*-1
+        velX = velX*-1.2 # just a little bit faster when the ball hits the bar vs the edge
+        score += 1
     elif x < 20:
-        velX *= -1.3
-        velY *= 1.3
+        velX *= -1.1
+        velY *= 1.1
         x += velX
     
 class Particle(object):
