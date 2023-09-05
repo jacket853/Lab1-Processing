@@ -4,22 +4,15 @@ Date: 9/6/23
 Description: The classic video game Pong, reimagined in Processing's wonderful Python v2.7
 '''
 
+# clearing console??
+# import os
+# os.system('cls' if os.name == 'nt' else 'clear')
+
 x, y, velX, velY = 0, 0, 0, 0
 DIAM = 10
 RECTSIZE = 100
 objs = []
 score = 0
-
-def restart():
-    # This function redraws the board (upon startup and when a key is pressed), resets the ball's coordinates/speed, and resets the game score
-    global x, y, velX, velY, score
-    
-    score = 0
-    print("Your current highscore is: {}".format(score)) # f-strings don't come out until python 3
-    x = width/2
-    y = height/2
-    velX = random(2,5)
-    velY = random(3,6)
 
 def setup():
     size(800,550)
@@ -41,6 +34,17 @@ def draw():
     checkHit()
     x += velX
     y += velY
+
+def restart():
+    # This function redraws the board (upon startup and when a key is pressed), resets the ball's coordinates/speed, and prints the game's score
+    global x, y, velX, velY, score
+    
+    print("Your current score is: {}".format(score)) # f-strings don't come out until python 3
+    score = 0 # reset game score
+    x = width/2
+    y = height/2
+    velX = random(2,5)
+    velY = random(3,6)
 
 def keyPressed():
     # This function, upon a keypress, will call the above restart() function
