@@ -36,19 +36,26 @@ def draw():
     y += velY
 
 def restart():
-    # This function redraws the board (upon startup and when a key is pressed), resets the ball's coordinates/speed, and prints the game's score
-    global x, y, velX, velY, score
+    # This function redraws the board (upon startup and when a key is pressed), resets the ball's coordinates/speed
+    global x, y, velX, velY
     
-    print("Your current score is: {}".format(score)) # f-strings don't come out until python 3
-    score = 0 # reset game score
+    printScore()
     x = width/2
     y = height/2
-    velX = random(2,5)
-    velY = random(3,6)
+    velX = random(2,4)
+    velY = random(3,5)
 
 def keyPressed():
     # This function, upon a keypress, will call the above restart() function
     restart()
+
+def printScore():
+    # This function prints and then resets the game score in the Processing console
+    global score
+    for i in range(5):
+        print("\n")
+    print("Your current score is: {}".format(score)) # f-strings don't come out until python 3
+    score = 0 # reset game score
 
 def checkHit():
     # This function runs to check if the ball has touched (if its coordinates are greater/less than the coordinates of) the bar, wall, or edges of the window. If so, it changes the ball's direction and adds speed
